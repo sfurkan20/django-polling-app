@@ -1,0 +1,1 @@
+web: gunicorn polling_site.wsgi
