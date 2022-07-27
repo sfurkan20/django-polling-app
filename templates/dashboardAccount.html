@@ -1,0 +1,60 @@
+{% extends "_dashboard.html" %}
+
+{% block accountActive %}active{% endblock %}
+
+{% block dashboardBody %}
+<div class="container">
+    <div class="row">
+        <div class="d-flex flex-column flex-shrink-0 p-3 bg-light mb-2 mr-5" style="width: 280px;">
+            <ul class="nav nav-pills flex-column mb-auto">
+                <li class="nav-item">
+                    <a href="#" class="nav-link active" aria-current="page">
+                        <i class="bi bi-person"></i>
+                        Account
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div>
+            <form method="POST" action="{% url 'changeMail' %}">
+                {% csrf_token %}
+                <div class="container mt-4">
+                    <h4>Change e-mail</h4>
+                        {% for message in messages %}
+                            <div class="alert alert-warning" role="alert">
+                                {{message}}
+                            </div>
+                        {% endfor %}
+                    <div class="form-group">
+                        {{changeEmailForm.email}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+            <br>
+            <br>
+            <form method="POST" action="{% url 'changePassword' %}">
+                {% csrf_token %}
+                <div class="container mt-4">
+                    <h4>Change password</h4>
+                    {% for error in changePasswordForm.non_field_errors %}
+                        <div class="alert alert-danger" role="alert">
+                            {{error}}
+                        </div>
+                    {% endfor %}
+                    <div class="form-group">
+                        {{changePasswordForm.currentPassword}}
+                    </div>
+                    <div class="form-group">
+                        {{changePasswordForm.password}}
+                    </div>
+                    <div class="form-group">
+                        {{changePasswordForm.password2}}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

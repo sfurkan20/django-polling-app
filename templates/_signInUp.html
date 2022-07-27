@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block content %}
+<form method="POST">
+    {% csrf_token %}
+    <div class="container mt-4 w-25">
+        {% block formTitle %}{% endblock %}
+        {% for field, errors in form.errors.items %}
+            {% for error in errors %}
+                <div class="alert alert-danger" role="alert">
+                    {{error}}
+                </div>
+            {% endfor %}
+            <!--{ else }
+                <div class="alert alert-{{message.tags}}" role="alert">
+                    {{message}}
+                </div>
+            { endif }-->
+        {% endfor %}
+        {% block formContent %}{% endblock %}
+    </div>
+</form>
+{% endblock %}

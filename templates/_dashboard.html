@@ -1,0 +1,23 @@
+{% extends "_base.html" %}
+
+{% block imports %}
+    {% load static %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <ul class="navbar-nav">
+            <li class="h4 nav-item">
+              <a class="nav-link {% block pollsActive %}{% endblock %}" href="{% url 'dashboardPolls' %}">Polls</a>
+            </li>
+            <li class="h4 ml-5 nav-item">
+                <a class="nav-link {% block accountActive %}{% endblock %}" href="{% url 'dashboardAccount' %}">Account</a>
+            </li>
+          </ul>
+    </nav>
+    <hr>
+    {% block dashboardBody %}{% endblock %}
+</div>
+{% endblock %}
