@@ -1,6 +1,6 @@
 from pydoc import locate
 from django import forms
-from polling_site.settings import AUTH_PASSWORD_VALIDATORS
+from polling_site.base_settings import AUTH_PASSWORD_VALIDATORS
 
 class PasswordField(forms.CharField):
     min_length = 5
