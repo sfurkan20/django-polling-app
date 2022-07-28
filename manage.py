@@ -6,7 +6,7 @@ from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
 if not BASE_DIR in sys.path:
-    sys.path.append(BASE_DIR) 
+    sys.path.append(BASE_DIR)
 
 def main():
     """Run administrative tasks."""
