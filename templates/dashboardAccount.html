@@ -37,9 +37,9 @@
                 {% csrf_token %}
                 <div class="container mt-4">
                     <h4>Change password</h4>
-                    {% for error in changePasswordForm.non_field_errors %}
+                    {% for message in messages %}
                         <div class="alert alert-danger" role="alert">
-                            {{error}}
+                            {{message}}
                         </div>
                     {% endfor %}
                     <div class="form-group">

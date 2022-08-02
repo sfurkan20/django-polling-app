@@ -18,10 +18,6 @@ class LoginForm(forms.Form):
         username = self.cleaned_data["username"]
         password = self.cleaned_data["password"]
 
-        user = authenticate(username=username, password=password)
-        if user is None or not user.is_active:
-            raise forms.ValidationError("Check your username and password.")
-
         return self.cleaned_data
 
 class RegisterForm(forms.Form):

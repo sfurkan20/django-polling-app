@@ -1,0 +1,50 @@
+{% extends "dashboardPolls.html" %}
+
+{% block imports %}
+    {{ block.super }}
+    {% load static %}
+    <script src="{% static 'js/createPoll.js' %}"></script>
+{% endblock %}
+
+{% block dashboardBody %}
+<div class="alert alert-warning" role="alert">
+    Warning: If you make a change in options, all the votes will be gone (to avoid deceptions).
+</div>
+<form method="POST" action="{% url 'editPoll' id=id %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <h5>Title</h5>
+        {{form.title}}
+    </div>
+    <div class="form-group">
+        <h5>Description</h5>
+        {{form.description}}
+    </div>
+    <div id="options">
+        <h5>Options<i class="bi bi-plus-circle-dotted ml-2" onclick="addOption()"></i></h5>
+        <script>
+            optionCount = 0
+        </script>
+        {% for option in formOptions %}
+        <script>
+            $(document).ready(()=>{
+                addOption("{{option}}")
+            })
+        </script>
+        {% endfor %}
+    </div>
+    <div class="form-group">
+        <h5>Is multiple selections allowed?</h5>
+        {{form.isMultipleSelectionsAllowed}}
+    </div>
+    <div class="form-group">
+        <h5>Are votes changeable?</h5>
+        {{form.isSelectionChangeable}}
+    </div>
+    <div class="form-group">
+        <h5>Is publicly visible?</h5>
+        {{form.isPublic}}
+    </div>
+    <button type="submit" class="btn btn-primary">Save Poll</button>
+</form>
+{% endblock %}

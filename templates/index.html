@@ -1,7 +1,41 @@
 {% extends "_base.html" %}
 
-{% block content %}
-    {% for poll in popularPolls %}
-        
+{% block content %}    
+  <p class="h4 mb-3 text-center">Public Polls</p>
+    {% if page_obj|length == 0 %}
+        <p>No polls to show.</p>
+    {% endif %}
+
+    {% for pollRow in page_obj %}
+        <div class="list-group list-group-horizontal justify-content-center mb-4">
+          {% for poll in pollRow %}
+          <div class="list-group-item">
+            <div class="card" style="width: 15rem;">
+                <div class="card-body">
+                  <h5 class="card-title"><a href="{% url 'viewPoll' id=poll.id %}">{{poll.title}}</a></h5>
+                  <p class="card-text">{{poll.description|truncatewords:5}}</p>
+                </div>
+              </div>
+          </div>
+          {% endfor %}
+        </div>
     {% endfor %}
+
+    <div class="pagination">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <a href="?page=1">&laquo; first</a>
+              <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+          {% endif %}
+
+          <span class="current">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+
+          {% if page_obj.has_next %}
+              <a href="?page={{ page_obj.next_page_number }}">next</a>
+              <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+          {% endif %}
+      </span>
+    </div>
 {% endblock %}

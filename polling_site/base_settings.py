@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dashboard.apps.DashboardConfig',
     'accounts.apps.AccountsConfig',
+    'polls.apps.PollsConfig',
+    'crispy_forms',
+    'ipware'
 ]
 
 MIDDLEWARE = [
@@ -127,7 +130,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#WhiteNoise configuration
+# WhiteNoise configuration
 
 MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"

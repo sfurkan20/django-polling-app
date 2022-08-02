@@ -1,0 +1,41 @@
+{% extends "dashboardPolls.html" %}
+
+{% block imports %}
+    {{ block.super }}
+    {% load static %}
+    <script src="{% static 'js/createPoll.js' %}"></script>
+{% endblock %}
+
+{% block dashboardBody %}
+<form method="POST" action="{% url 'createPoll' %}">
+    {% csrf_token %}
+    <div class="form-group">
+        <h5>Title</h5>
+        {{form.title}}
+    </div>
+    <div class="form-group">
+        <h5>Description</h5>
+        {{form.description}}
+    </div>
+    <div id="options">
+        <h5>Options<i class="bi bi-plus-circle-dotted ml-2" onclick="addOption()"></i></h5>
+        <div class="form-group">
+            <div><label for="option1">Option 1</label></div>
+            <input type="text" id="option1" name="option1" maxlength="50" required>
+        </div>
+    </div>
+    <div class="form-group">
+        <h5>Is multiple selections allowed?</h5>
+        {{form.isMultipleSelectionsAllowed}}
+    </div>
+    <div class="form-group">
+        <h5>Are votes changeable?</h5>
+        {{form.isSelectionChangeable}}
+    </div>
+    <div class="form-group">
+        <h5>Is publicly visible?</h5>
+        {{form.isPublic}}
+    </div>
+    <button type="submit" class="btn btn-primary">Create Poll</button>
+</form>
+{% endblock %}
